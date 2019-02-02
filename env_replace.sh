@@ -17,7 +17,7 @@ else
       echo "\$PROXY_PASS ENV is OK!"
 fi
 
-if test -z "$PROXY_HOST1 " 
+if test -z "$PROXY_HOST1" 
 then
       echo "\$PROXY_HOST1 ENV is not define! ERORR!!!"
 else
