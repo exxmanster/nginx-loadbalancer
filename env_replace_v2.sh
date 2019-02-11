@@ -3,26 +3,26 @@
 
 
 # ########## ENV Check ##########
-# if test -z "$NGINX_PORT" 
-# then
-#       echo "\$NGINX_PORT ENV is not define! ERORR!!!"
-# else
-#       echo "\$NGINX_PORT ENV is OK!"
-# fi
+if test -z "$NGINX_PORT" 
+then
+      echo "\$NGINX_PORT ENV is not define! ERORR!!!"
+else
+      echo "\$NGINX_PORT ENV is OK!"
+fi
 
-# if test -z "$PROXY_PASS" 
-# then
-#       echo "\$PROXY_PASS ENV is not define! ERORR!!!"
-# else
-#       echo "\$PROXY_PASS ENV is OK!"
-# fi
+if test -z "$PROXY_PASS" 
+then
+      echo "\$PROXY_PASS ENV is not define! ERORR!!!"
+else
+      echo "\$PROXY_PASS ENV is OK!"
+fi
 
-# if test -z "$PROXY_HOST1" 
-# then
-#       echo "\$PROXY_HOST1 ENV is not define! ERORR!!!"
-# else
-#       echo "\$PROXY_HOST1 ENV is OK!"
-# fi
+if test -z "$PROXY_HOST1" 
+then
+      echo "\$PROXY_HOST1 ENV is not define! ERORR!!!"
+else
+      echo "\$PROXY_HOST1 ENV is OK!"
+fi
 
 
 # sleep 1

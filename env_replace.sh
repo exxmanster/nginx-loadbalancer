@@ -1,51 +1,83 @@
+include_dir=/etc/nginx/includes/
 
 
 echo build starting NGINX config
 echo
-
-### Check NGINX PORT
-echo replacing ___NGINX_PORT___/$NGINX_PORT
-
-### Check PROXY_PASS
-echo replacing ___PROXY_PASS1___/${PROXY_PASS1}
-echo replacing ___PROXY_PASS2___/${PROXY_PASS2}
-echo replacing ___PROXY_PASS3___/${PROXY_PASS3}
-echo replacing ___PROXY_PASS4___/${PROXY_PASS4}
-echo replacing ___PROXY_PASS5___/${PROXY_PASS5}
-
-### Check PROXY_HOST 
-echo replacing ___PROXY_HOST1___/$PROXY_HOST1
-echo replacing ___PROXY_HOST2___/$PROXY_HOST2
-echo replacing ___PROXY_HOST3___/$PROXY_HOST3
-echo replacing ___PROXY_HOST4___/$PROXY_HOST4
-echo replacing ___PROXY_HOST5___/$PROXY_HOST5
-
-### Nginx port replacment part
-    sed -i "s?___NGINX_PORT___?$NGINX_PORT?g" /etc/nginx/nginx.conf
-
-### Proxy pass and upstream name replacment part 
-sed -i "s?___PROXY_PASS1___?${PROXY_PASS1}?g" /etc/nginx/nginx.conf
-sed -i "s?___PROXY_PASS2___?${PROXY_PASS2}?g" /etc/nginx/nginx.conf
-sed -i "s?___PROXY_PASS3___?${PROXY_PASS3}?g" /etc/nginx/nginx.conf
-sed -i "s?___PROXY_PASS4___?${PROXY_PASS4}?g" /etc/nginx/nginx.conf
-sed -i "s?proxy_pass" ""/"'___PROXY_PASS5___'?proxy_pass" ""/"'${PROXY_PASS5}'?g" /etc/nginx/nginx.conf
-
-### Server part replace 
-sed -i "s?___PROXY_HOST1___?$PROXY_HOST1?g" /etc/nginx/nginx.conf
-sed -i "s?___PROXY_HOST2___?$PROXY_HOST2?g" /etc/nginx/nginx.conf
-sed -i "s?___PROXY_HOST3___?$PROXY_HOST3?g" /etc/nginx/nginx.conf
-sed -i "s?___PROXY_HOST4___?$PROXY_HOST4?g" /etc/nginx/nginx.conf
-sed -i "s?___PROXY_HOST5___?$PROXY_HOST5?g" /etc/nginx/nginx.conf
-
-
-
-###Debug
 echo
 echo
-echo
-cat /etc/nginx/nginx.conf
-echo
-echo
-echo
+
+sed -i "s/___NGINX_PORT___/$NGINX_PORT/g" /etc/nginx/nginx.conf
+
+if test -z "$PROXY_HOST1"
+
+then
+      echo " PROXY_HOST1 ENV is not define! "
+else
+      cat <<EOF >"$include_dir"/$PROXY_HOST1
+location /$PROXY_HOST1 {
+proxy_pass '$PROXY_PASS1';
+}
+EOF
+sed -i "21i include $include_dir$PROXY_HOST1;" /etc/nginx/nginx.conf
+fi
+
+if test -z "$PROXY_HOST2"
+then
+      echo " PROXY_HOST2 ENV is not define! "
+else
+      cat <<EOF >"$include_dir"/$PROXY_HOST2
+location /$PROXY_HOST2 {
+proxy_pass '$PROXY_PASS2';
+}
+EOF
+sed -i "22i include "$include_dir"$PROXY_HOST2;" /etc/nginx/nginx.conf
+fi
+
+if test -z "$PROXY_HOST3"
+then
+      echo " PROXY_HOST3 ENV is not define! "
+else
+      cat <<EOF >"$include_dir"/$PROXY_HOST3
+location /$PROXY_HOST3 {
+proxy_pass '$PROXY_PASS3';
+}
+EOF
+sed -i "23i include "$include_dir"$PROXY_HOST3;" /etc/nginx/nginx.conf
+fi
+
+if test -z "$PROXY_HOST4"
+then
+      echo " PROXY_HOST4 ENV is not define! "
+else
+      cat <<EOF >"$include_dir"/$PROXY_HOST4
+location /$PROXY_HOST4 {
+proxy_pass '$PROXY_PASS4';
+}
+EOF
+sed -i "24i include "$include_dir"$PROXY_HOST4;" /etc/nginx/nginx.conf
+fi
+
+if test -z "$PROXY_HOST5"
+then
+      echo " PROXY_HOST5 ENV is not define! "
+else
+      cat <<EOF >"$include_dir"/$PROXY_HOST5
+location /$PROXY_HOST5 {
+proxy_pass '$PROXY_PASS5';
+}
+EOF
+sed -i "25i \include "$include_dir"$PROXY_HOST5;" /etc/nginx/nginx.conf
+fi
+
+
+# ###Debug
+# echo
+# echo
+# echo
+# cat /etc/nginx/nginx.conf
+# echo
+# echo
+# echo
+
 ### Nginx start
 nginx -g 'daemon off;'
