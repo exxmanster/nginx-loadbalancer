@@ -70,14 +70,14 @@ sed -i "25i \include "$include_dir"$PROXY_HOST5;" /etc/nginx/nginx.conf
 fi
 
 
-# ###Debug
-# echo
-# echo
-# echo
-# cat /etc/nginx/nginx.conf
-# echo
-# echo
-# echo
+###Debug
+echo
+echo
+echo
+cat /etc/nginx/nginx.conf
+echo
+echo
+echo
 
 ### Nginx start
 nginx -g 'daemon off;'
